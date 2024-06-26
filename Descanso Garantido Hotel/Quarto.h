@@ -16,15 +16,9 @@ private:
 
 public:
     Quarto()
-    {
-        numeroQuarto = "";
-        quantidadeHospedes = 0;
-        valorDiaria = 0.0;
-        ocupado = false;
-        codigoEstadia = "";
-    }
+        : numeroQuarto(""), quantidadeHospedes(0), valorDiaria(0.0), ocupado(false), codigoEstadia("") {}
 
-    void setNumeroQuarto(std::string& num)
+    void setNumeroQuarto(const std::string& num)
     {
         numeroQuarto = num;
     }
@@ -44,37 +38,37 @@ public:
         ocupado = estado;
     }
 
-    void setCodigoEstadia(string& cod)
+    void setCodigoEstadia(const std::string& cod)
     {
         codigoEstadia = cod;
     }
 
-    string getNumeroQuarto()
+    std::string getNumeroQuarto() const
     {
         return numeroQuarto;
     }
 
-    int getQuantidadeHospedes()
+    int getQuantidadeHospedes() const
     {
         return quantidadeHospedes;
     }
 
-    double getValorDiaria()
+    double getValorDiaria() const
     {
         return valorDiaria;
     }
 
-    bool getOcupado()
+    bool getOcupado() const
     {
         return ocupado;
     }
 
-    string getCodigoEstadia()
+    std::string getCodigoEstadia() const
     {
         return codigoEstadia;
     }
 
-    void saveToFile(string& filename)
+    void saveToFile(const std::string& filename)
     {
         std::ofstream outFile(filename, std::ios::binary | std::ios::app);
         if (!outFile)
@@ -90,11 +84,11 @@ public:
         writeString(outFile, codigoEstadia);
 
         outFile.close();
-        cout << "Dados do quarto salvos com sucesso no arquivo " << filename <<endl;
+        std::cout << "Dados do quarto salvos com sucesso no arquivo " << filename << std::endl;
     }
 
 private:
-    void writeString(ofstream& outFile,string& str)
+    void writeString(std::ofstream& outFile, const std::string& str)
     {
         size_t length = str.size();
         outFile.write(reinterpret_cast<const char*>(&length), sizeof(length));

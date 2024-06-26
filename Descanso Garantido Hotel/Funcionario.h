@@ -5,15 +5,14 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <limits>    // Necessário para std::numeric_limits
 #include "Pessoa.h"
-
-using namespace std;
 
 class Funcionario : public Pessoa
 {
 private:
-    string matricula;
-    string cargo;
+    std::string matricula;
+    std::string cargo;
     double salario;
     static int employeeCounter;
 
@@ -25,12 +24,12 @@ public:
         salario = 0.0;
     }
 
-    void setMatricula(string &m)
+    void setMatricula(const std::string &m)
     {
         matricula = m;
     }
 
-    void setCargo(string &c)
+    void setCargo(const std::string &c)
     {
         cargo = c;
     }
@@ -40,65 +39,65 @@ public:
         salario = s;
     }
 
-    string getMatricula()
+    std::string getMatricula() const
     {
         return matricula;
     }
 
-    string getCargo()
+    std::string getCargo() const
     {
         return cargo;
     }
 
-    double getSalario()
+    double getSalario() const
     {
         return salario;
     }
 
     void generateEmployeeMatricula()
     {
-        ostringstream oss;
+        std::ostringstream oss;
         oss << "EMP" << ++employeeCounter;
         matricula = oss.str();
     }
 
-    void saveToFile(string &filename)
+    void saveToFile(const std::string &filename)
     {
-        ofstream outFile(filename, ios::binary | ios::app);
+        std::ofstream outFile(filename, std::ios::binary | std::ios::app);
         if (!outFile)
         {
-            cerr << "Erro ao abrir o arquivo para escrita." << endl;
+            std::cerr << "Erro ao abrir o arquivo para escrita." << std::endl;
             return;
         }
 
         writeString(outFile, getNome());
-        int idade = getIdade();
+        int idade = getAge();
         outFile.write(reinterpret_cast<const char*>(&idade), sizeof(idade));
         writeString(outFile, matricula);
         writeString(outFile, cargo);
         outFile.write(reinterpret_cast<const char*>(&salario), sizeof(salario));
 
         outFile.close();
-        cout << "Dados salvos com sucesso no arquivo " << filename << endl;
+        std::cout << "Dados salvos com sucesso no arquivo " << filename << std::endl;
     }
 
     void cadastrarFuncionario()
     {
-        cadastrar();
+        cadastrarC();
         generateEmployeeMatricula();
 
-        cout << "Digite o cargo do funcionário: ";
-        getline(cin, cargo);
+        std::cout << "Digite o cargo do funcionário: ";
+        std::getline(std::cin, cargo);
 
-        cout << "Digite o salário do funcionário: ";
-        cin >> salario;
-        cin.ignore();
+        std::cout << "Digite o salário do funcionário: ";
+        std::cin >> salario;
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // Limpa o buffer de entrada
 
-        cout << "\nCadastro de funcionário realizado com sucesso!" << endl;
+        std::cout << "\nCadastro de funcionário realizado com sucesso!" << std::endl;
     }
 
 private:
-    void writeString(ofstream &outFile, string &str)
+    void writeString(std::ofstream &outFile, const std::string &str)
     {
         size_t length = str.size();
         outFile.write(reinterpret_cast<const char*>(&length), sizeof(length));

@@ -7,14 +7,12 @@
 #include <sstream>
 #include "Pessoa.h"
 
-using namespace std;
-
 class Client : public Pessoa
 {
 private:
-    string code;
-    string address;
-    string contact;
+    std::string code;
+    std::string address;
+    std::string contact;
     static int clientCounter;
 
 public:
@@ -25,79 +23,79 @@ public:
         contact = "";
     }
 
-    void setCode(string &c)
+    void setCode(const std::string &c)
     {
         code = c;
     }
 
-    void setAddress(string &a)
+    void setAddress(const std::string &a)
     {
         address = a;
     }
 
-    void setContact(string &c)
+    void setContact(const std::string &c)
     {
         contact = c;
     }
 
-    string getCode()
+    std::string getCode() const
     {
         return code;
     }
 
-    string getAddress()
+    std::string getAddress() const
     {
         return address;
     }
 
-    string getContact()
+    std::string getContact() const
     {
         return contact;
     }
 
     void generateClientCode()
     {
-        ostringstream oss;
+        std::ostringstream oss;
         oss << "CL" << ++clientCounter;
         code = oss.str();
     }
 
-    void saveToFile(string &filename)
+    void saveToFile(const std::string &filename)
     {
-        ofstream outFile(filename, ios::binary | ios::app);
+        std::ofstream outFile(filename, std::ios::binary | std::ios::app);
         if (!outFile)
         {
-            cerr << "Erro ao abrir o arquivo para escrita." << endl;
+            std::cerr << "Erro ao abrir o arquivo para escrita." << std::endl;
             return;
         }
 
         writeString(outFile, getNome());
-        int idade = getIdade();
+        int idade = getAge();
         outFile.write(reinterpret_cast<const char*>(&idade), sizeof(idade));
         writeString(outFile, code);
         writeString(outFile, address);
         writeString(outFile, contact);
 
         outFile.close();
-        cout << "Dados salvos com sucesso no arquivo " << filename << endl;
+        std::cout << "Dados salvos com sucesso no arquivo " << filename << std::endl;
     }
 
     void cadastrarCliente()
     {
-        cadastrar();
+        cadastrarC();
         generateClientCode();
 
-        cout << "Digite o endereço do cliente: ";
-        getline(cin, address);
+        std::cout << "Digite o endereço do cliente: ";
+        std::getline(std::cin, address);
 
-        cout << "Digite o contato do cliente: ";
-        getline(cin, contact);
+        std::cout << "Digite o contato do cliente: ";
+        std::getline(std::cin, contact);
 
-        cout << "\nCadastro de cliente realizado com sucesso!" << endl;
+        std::cout << "\nCadastro de cliente realizado com sucesso!" << std::endl;
     }
 
 private:
-    void writeString(ofstream &outFile, string &str)
+    void writeString(std::ofstream &outFile, const std::string &str)
     {
         size_t length = str.size();
         outFile.write(reinterpret_cast<const char*>(&length), sizeof(length));
