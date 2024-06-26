@@ -32,7 +32,11 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="Hotel.h" />
+		<Unit filename="Client.h" />
+		<Unit filename="Estadia.h" />
+		<Unit filename="Funcionario.h" />
+		<Unit filename="Pessoa.h" />
+		<Unit filename="Quarto.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

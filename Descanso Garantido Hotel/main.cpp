@@ -1,18 +1,21 @@
 #include <iostream>
-#include "Hotel.h"
-using namespace std;
+#include "Funcionario.h"
+#include "Quarto.h"
+#include "Estadia.h"
 void menu();
 int main()
 {
+    int opt;
     menu();
-    FILE*arquivo;
-    //arquivo=fopen("arquivo_saida.btxt",);
 
 
 }
 void menu()
 {
-    cout<<"Bem vindo ao hotel Descanso Garantido"<<endl;
-    cout<<"Diarias de 14h a 12h do dia seguinte
+    cout<<"Bem Vindo ao Descanso Garantido Hotel"<<endl;
+    cout<<"--------------------------------------"<<endl;
+    cout<<"Opção 1-Cadastrar Cliente"<<endl;
+    cout<<"Opção 2-Cadastrar Funcionário"<<endl;
+    cout<<"Opção 3-Registrar diária"<<endl;
 
 }
