@@ -96,6 +96,30 @@ public:
         std::cout << "\nCadastro de funcionário realizado com sucesso!" << std::endl;
     }
 
+    void exibirInformacoes()
+    {
+        std::cout << "Matrícula: " << matricula << std::endl;
+        std::cout << "Nome: " << getNome() << std::endl;
+        std::cout << "Idade: " << getAge() << std::endl;
+        std::cout << "Cargo: " << cargo << std::endl;
+        std::cout << "Salário: " << salario << std::endl;
+    }
+
+    bool searchFuncionario(const std::string &matriculaToFind)
+    {
+        return (matricula == matriculaToFind);
+    }
+
+    void showInfo()
+    {
+        std::cout << "Informações do Funcionário:" << std::endl;
+        std::cout << "Matrícula: " << matricula << std::endl;
+        std::cout << "Nome: " << getNome() << std::endl;
+        std::cout << "Idade: " << getAge() << std::endl;
+        std::cout << "Cargo: " << cargo << std::endl;
+        std::cout << "Salário: " << salario << std::endl;
+    }
+
 private:
     void writeString(std::ofstream &outFile, const std::string &str)
     {

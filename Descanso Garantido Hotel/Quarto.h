@@ -2,7 +2,7 @@
 #define QUARTO_H_INCLUDED
 
 #include <iostream>
-#include <fstream>
+#include <cstdio>
 #include <string>
 
 class Quarto
@@ -41,6 +41,7 @@ public:
     void setCodigoEstadia(const std::string& cod)
     {
         codigoEstadia = cod;
+        ocupado = !cod.empty(); // Se há código de estadia, o quarto está ocupado
     }
 
     std::string getNumeroQuarto() const
@@ -70,7 +71,7 @@ public:
 
     void saveToFile(const std::string& filename)
     {
-        std::ofstream outFile(filename, std::ios::binary | std::ios::app);
+        FILE* outFile = fopen(filename.c_str(), "ab");
         if (!outFile)
         {
             std::cerr << "Erro ao abrir o arquivo para escrita." << std::endl;
@@ -78,21 +79,54 @@ public:
         }
 
         writeString(outFile, numeroQuarto);
-        outFile.write(reinterpret_cast<const char*>(&quantidadeHospedes), sizeof(quantidadeHospedes));
-        outFile.write(reinterpret_cast<const char*>(&valorDiaria), sizeof(valorDiaria));
-        outFile.write(reinterpret_cast<const char*>(&ocupado), sizeof(ocupado));
+        fwrite(&quantidadeHospedes, sizeof(quantidadeHospedes), 1, outFile);
+        fwrite(&valorDiaria, sizeof(valorDiaria), 1, outFile);
+        fwrite(&ocupado, sizeof(ocupado), 1, outFile);
         writeString(outFile, codigoEstadia);
 
-        outFile.close();
+        fclose(outFile);
         std::cout << "Dados do quarto salvos com sucesso no arquivo " << filename << std::endl;
     }
 
+    void readFromFile(const std::string& filename)
+    {
+        FILE* inFile = fopen(filename.c_str(), "rb");
+        if (!inFile)
+        {
+            std::cerr << "Erro ao abrir o arquivo para leitura." << std::endl;
+            return;
+        }
+
+        while (!feof(inFile))
+        {
+            numeroQuarto = readString(inFile);
+            fread(&quantidadeHospedes, sizeof(quantidadeHospedes), 1, inFile);
+            fread(&valorDiaria, sizeof(valorDiaria), 1, inFile);
+            fread(&ocupado, sizeof(ocupado), 1, inFile);
+            codigoEstadia = readString(inFile);
+        }
+
+        fclose(inFile);
+    }
+
 private:
-    void writeString(std::ofstream& outFile, const std::string& str)
+    void writeString(FILE* file, const std::string& str)
     {
         size_t length = str.size();
-        outFile.write(reinterpret_cast<const char*>(&length), sizeof(length));
-        outFile.write(str.c_str(), length);
+        fwrite(&length, sizeof(length), 1, file);
+        fwrite(str.c_str(), sizeof(char), length, file);
+    }
+
+    std::string readString(FILE* file)
+    {
+        size_t length;
+        fread(&length, sizeof(length), 1, file);
+        char* buffer = new char[length + 1];
+        fread(buffer, sizeof(char), length, file);
+        buffer[length] = '\0';
+        std::string str(buffer);
+        delete[] buffer;
+        return str;
     }
 };
 

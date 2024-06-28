@@ -1,10 +1,9 @@
-#ifndef ESTADIA_H_INCLUDED
+    #ifndef ESTADIA_H_INCLUDED
 #define ESTADIA_H_INCLUDED
 
 #include <iostream>
-#include <fstream>
-#include <string>
-#include <sstream>
+#include <cstdio>
+#include <cstring>
 
 class Estadia
 {
@@ -26,17 +25,17 @@ public:
         codigoCliente = "";
     }
 
-    void setCodigoEstadia(std::string &codigo)
+    void setCodigoEstadia(const std::string &codigo)
     {
         codigoEstadia = codigo;
     }
 
-    void setDataEntrada(std::string &data)
+    void setDataEntrada(const std::string &data)
     {
         dataEntrada = data;
     }
 
-    void setDataSaida(std::string &data)
+    void setDataSaida(const std::string &data)
     {
         dataSaida = data;
     }
@@ -46,46 +45,44 @@ public:
         quantidadeDiarias = dias;
     }
 
-    void setCodigoCliente(std::string &codigo)
+    void setCodigoCliente(const std::string &codigo)
     {
         codigoCliente = codigo;
     }
 
-    std::string getCodigoEstadia()
+    std::string getCodigoEstadia() const
     {
         return codigoEstadia;
     }
 
-    std::string getDataEntrada()
+    std::string getDataEntrada() const
     {
         return dataEntrada;
     }
 
-    std::string getDataSaida()
+    std::string getDataSaida() const
     {
         return dataSaida;
     }
 
-    int getQuantidadeDiarias()
+    int getQuantidadeDiarias() const
     {
         return quantidadeDiarias;
     }
 
-    std::string getCodigoCliente()
+    std::string getCodigoCliente() const
     {
         return codigoCliente;
     }
 
     void generateCodigoEstadia()
     {
-        std::ostringstream oss;
-        oss << "EST" << ++estadiaCounter;
-        codigoEstadia = oss.str();
+        codigoEstadia = "EST" + std::to_string(++estadiaCounter);
     }
 
-    void saveToFile(std::string &filename)
+    void saveToFile(const std::string &filename)
     {
-        std::ofstream outFile(filename, std::ios::binary | std::ios::app);
+        FILE *outFile = fopen(filename.c_str(), "ab");
         if (!outFile)
         {
             std::cerr << "Erro ao abrir o arquivo para escrita." << std::endl;
@@ -95,19 +92,19 @@ public:
         writeString(outFile, codigoEstadia);
         writeString(outFile, dataEntrada);
         writeString(outFile, dataSaida);
-        outFile.write(reinterpret_cast<const char*>(&quantidadeDiarias), sizeof(quantidadeDiarias));
+        fwrite(&quantidadeDiarias, sizeof(int), 1, outFile);
         writeString(outFile, codigoCliente);
 
-        outFile.close();
+        fclose(outFile);
         std::cout << "Dados de estadia salvos com sucesso no arquivo " << filename << std::endl;
     }
 
 private:
-    void writeString(std::ofstream &outFile, std::string &str)
+    void writeString(FILE *outFile, const std::string &str)
     {
         size_t length = str.size();
-        outFile.write(reinterpret_cast<const char*>(&length), sizeof(length));
-        outFile.write(str.c_str(), length);
+        fwrite(&length, sizeof(length), 1, outFile);
+        fwrite(str.c_str(), sizeof(char), length, outFile);
     }
 };
 

@@ -1,0 +1,39 @@
+# depslib dependency file v1.0
+1719594421 source:c:\users\luan\documents\github\descanso_garantido_hotel\descanso garantido hotel\main.cpp
+	<iostream>
+	<limits>
+	"Funcionario.h"
+	"Client.h"
+	"Quarto.h"
+	"Estadia.h"
+
+1719594421 c:\users\luan\documents\github\descanso_garantido_hotel\descanso garantido hotel\funcionario.h
+	<iostream>
+	<fstream>
+	<string>
+	<sstream>
+	<limits>
+	"Pessoa.h"
+
+1719593933 c:\users\luan\documents\github\descanso_garantido_hotel\descanso garantido hotel\pessoa.h
+	<iostream>
+	<string>
+	<stdexcept>
+	<limits>
+
+1719594208 c:\users\luan\documents\github\descanso_garantido_hotel\descanso garantido hotel\client.h
+	<iostream>
+	<cstdio>
+	<string>
+	"Pessoa.h"
+
+1719593933 c:\users\luan\documents\github\descanso_garantido_hotel\descanso garantido hotel\quarto.h
+	<iostream>
+	<cstdio>
+	<string>
+
+1719593933 c:\users\luan\documents\github\descanso_garantido_hotel\descanso garantido hotel\estadia.h
+	<iostream>
+	<cstdio>
+	<cstring>
+
