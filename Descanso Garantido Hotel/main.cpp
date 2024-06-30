@@ -11,7 +11,7 @@ void cadastrarFuncionario();
 void registrarDiaria(Quarto quartos[], int numQuartos);
 void pesquisarCliente();
 void pesquisarFuncionario();
-
+// Lamoni Fez essa parte
 int main()
 {
     Quarto quartos[20];
@@ -20,14 +20,14 @@ int main()
         std::string num = "Q" + std::to_string(i + 1);
         quartos[i].setNumeroQuarto(num);
         quartos[i].setQuantidadeHospedes(2); // Exemplo de capacidade
-        quartos[i].setValorDiaria(100.0); // Exemplo de valor da di·ria
+        quartos[i].setValorDiaria(100.0); // Exemplo de valor da di√°ria
     }
 
     int opt;
     do
     {
         menu();
-        std::cout << "Inserir opÁ„o: ";
+        std::cout << "Inserir op√ß√£o: ";
         std::cin >> opt;
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Limpa o buffer de entrada
 
@@ -52,7 +52,7 @@ int main()
             std::cout << "Saindo do programa." << std::endl;
             break;
         default:
-            std::cout << "OpÁ„o inv·lida. Tente novamente." << std::endl;
+            std::cout << "Op√ß√£o inv√°lida. Tente novamente." << std::endl;
         }
     } while (opt != 0);
 
@@ -63,12 +63,12 @@ void menu()
 {
     std::cout << "Bem Vindo ao Descanso Garantido Hotel" << std::endl;
     std::cout << "--------------------------------------" << std::endl;
-    std::cout << "OpÁ„o 1 - Cadastrar Cliente" << std::endl;
-    std::cout << "OpÁ„o 2 - Cadastrar Funcion·rio" << std::endl;
-    std::cout << "OpÁ„o 3 - Registrar di·ria" << std::endl;
-    std::cout << "OpÁ„o 4 - Pesquisar Cliente" << std::endl;
-    std::cout << "OpÁ„o 5 - Pesquisar Funcion·rio" << std::endl;
-    std::cout << "OpÁ„o 0 - Sair" << std::endl;
+    std::cout << "Op√ß√£o 1 - Cadastrar Cliente" << std::endl;
+    std::cout << "Op√ß√£o 2 - Cadastrar Funcion√°rio" << std::endl;
+    std::cout << "Op√ß√£o 3 - Registrar di√°ria" << std::endl;
+    std::cout << "Op√ß√£o 4 - Pesquisar Cliente" << std::endl;
+    std::cout << "Op√ß√£o 5 - Pesquisar Funcion√°rio" << std::endl;
+    std::cout << "Op√ß√£o 0 - Sair" << std::endl;
     std::cout << "--------------------------------------" << std::endl;
 }
 
@@ -103,20 +103,20 @@ void registrarDiaria(Quarto quartos[], int numQuartos)
     std::getline(std::cin, dataEntrada);
     estadia.setDataEntrada(dataEntrada);
 
-    std::cout << "Digite a data de saÌda (dd/mm/aaaa): ";
+    std::cout << "Digite a data de sa√≠da (dd/mm/aaaa): ";
     std::getline(std::cin, dataSaida);
     estadia.setDataSaida(dataSaida);
 
-    std::cout << "Digite o cÛdigo do cliente: ";
+    std::cout << "Digite o c√≥digo do cliente: ";
     std::getline(std::cin, codigoCliente);
     estadia.setCodigoCliente(codigoCliente);
 
-    std::cout << "Digite a quantidade de di·rias: ";
+    std::cout << "Digite a quantidade de di√°rias: ";
     std::cin >> quantidadeDiarias;
     estadia.setQuantidadeDiarias(quantidadeDiarias);
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-    std::cout << "Digite o n˙mero do quarto: ";
+    std::cout << "Digite o n√∫mero do quarto: ";
     std::getline(std::cin, numeroQuarto);
 
     bool quartoEncontrado = false;
@@ -126,7 +126,7 @@ void registrarDiaria(Quarto quartos[], int numQuartos)
         {
             if (quartos[i].getOcupado())
             {
-                std::cout << "Quarto j· est· ocupado." << std::endl;
+                std::cout << "Quarto j√° est√° ocupado." << std::endl;
             }
             else
             {
@@ -141,7 +141,7 @@ void registrarDiaria(Quarto quartos[], int numQuartos)
 
     if (!quartoEncontrado)
     {
-        std::cout << "N˙mero do quarto n„o encontrado." << std::endl;
+        std::cout << "N√∫mero do quarto n√£o encontrado." << std::endl;
     }
 
     std::string filename = "estadias.dat";
@@ -150,14 +150,14 @@ void registrarDiaria(Quarto quartos[], int numQuartos)
     // Adicionar pontos de fidelidade para o cliente
     Client cliente;
     cliente.readFromFile("clientes.dat");
-    cliente.addPontosFidelidade(quantidadeDiarias * 10); // Exemplo: 10 pontos por di·ria
+    cliente.addPontosFidelidade(quantidadeDiarias * 10); // Exemplo: 10 pontos por di√°ria
     cliente.saveToFile("clientes.dat");
 }
 
 void pesquisarCliente()
 {
     std::string keyword;
-    std::cout << "Digite o nome ou cÛdigo do cliente: ";
+    std::cout << "Digite o nome ou c√≥digo do cliente: ";
     std::getline(std::cin, keyword);
 
     Client cliente;
@@ -168,24 +168,24 @@ void pesquisarCliente()
     }
     else
     {
-        std::cout << "\nCliente n„o encontrado." << std::endl;
+        std::cout << "\nCliente n√£o encontrado." << std::endl;
     }
 }
 
 void pesquisarFuncionario()
 {
     std::string keyword;
-    std::cout << "Digite o nome ou matrÌcula do funcion·rio: ";
+    std::cout << "Digite o nome ou matr√≠cula do funcion√°rio: ";
     std::getline(std::cin, keyword);
 
     Funcionario funcionario;
     if (funcionario.searchFuncionario(keyword))
     {
-        std::cout << "\nFuncion·rio encontrado:" << std::endl;
+        std::cout << "\nFuncion√°rio encontrado:" << std::endl;
         funcionario.showInfo();
     }
     else
     {
-        std::cout << "\nFuncion·rio n„o encontrado." << std::endl;
+        std::cout << "\nFuncion√°rio n√£o encontrado." << std::endl;
     }
 }
