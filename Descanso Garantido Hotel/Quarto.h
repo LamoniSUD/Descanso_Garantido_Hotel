@@ -4,7 +4,10 @@
 #include <iostream>
 #include <cstdio>
 #include <string>
-
+/*classe Quarto
+Representa um quarto, com seus atributos número, quantidade de hóspedes
+valor da diária e se está ou não ocupado
+*/
 class Quarto
 {
 private:
@@ -15,29 +18,29 @@ private:
     std::string codigoEstadia;
 
 public:
-    Quarto()
+    Quarto()//Construtor parametrizado(ou personalizado)
         : numeroQuarto(""), quantidadeHospedes(0), valorDiaria(0.0), ocupado(false), codigoEstadia("") {}
-
+//define o número do quarto
     void setNumeroQuarto(const std::string& num)
     {
         this->numeroQuarto = num;
     }
-
+//Define a quantidade de Hospedes
     void setQuantidadeHospedes(int hospedes)
     {
         this->quantidadeHospedes = hospedes;
     }
-
+//Define o Valor da diária
     void setValorDiaria(double valor)
     {
         this->valorDiaria = valor;
     }
-
+//Define se está ocupado ou não
     void setOcupado(bool estado)
     {
         this->ocupado = estado;
     }
-
+//Define o código da estadia
     void setCodigoEstadia(const std::string& cod)
     {
         this->codigoEstadia = cod;
@@ -48,17 +51,17 @@ public:
     {
         return numeroQuarto;
     }
-
+//Obtém a quantidade de hóspedes
     int getQuantidadeHospedes() const
     {
         return quantidadeHospedes;
     }
-
+//Obtém o valor da Diária
     double getValorDiaria() const
     {
         return valorDiaria;
     }
-
+//Obtém o status se está ocupado ou não
     bool getOcupado() const
     {
         return ocupado;
@@ -68,7 +71,7 @@ public:
     {
         return codigoEstadia;
     }
-
+//Salva os dado no quarto no arquivo binário
     void saveToFile(const std::string& filename)
     {
         FILE* outFile = fopen(filename.c_str(), "ab");
@@ -87,7 +90,7 @@ public:
         fclose(outFile);
         std::cout << "Dados do quarto salvos com sucesso no arquivo " << filename << std::endl;
     }
-
+//Lê os dados do quarto em um arquivo binário
     void readFromFile(const std::string& filename)
     {
         FILE* inFile = fopen(filename.c_str(), "rb");
@@ -110,13 +113,14 @@ public:
     }
 
 private:
+    //Escreve os dados no arquivo binário
     void writeString(FILE* file, const std::string& str)
     {
         size_t length = str.size();
         fwrite(&length, sizeof(length), 1, file);
         fwrite(str.c_str(), sizeof(char), length, file);
     }
-
+//LÊ os dados do quarto do arquivo binário
     std::string readString(FILE* file)
     {
         size_t length;

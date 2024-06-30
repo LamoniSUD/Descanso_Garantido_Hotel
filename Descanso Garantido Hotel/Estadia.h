@@ -4,7 +4,12 @@
 #include <iostream>
 #include <cstdio>
 #include <cstring>
+/* classe Estadia
+Representa uma estadia,
+serve para gerenciar as
+informações de uma estadia
 
+*/
 class Estadia
 {
 private:
@@ -16,7 +21,7 @@ private:
     static int estadiaCounter;
 
 public:
-    Estadia()
+    Estadia()//construtor padrão
     {
         codigoEstadia = "";
         dataEntrada = "";
@@ -24,62 +29,62 @@ public:
         quantidadeDiarias = 0;
         codigoCliente = "";
     }
-
+//Define o codigo de uma estadia
     void setCodigoEstadia(const std::string &codigo)
     {
         this->codigoEstadia = codigo;
     }
-
+//Define a data de entrada
     void setDataEntrada(const std::string &data)
     {
         this->dataEntrada = data;
     }
-
+//Define a data de saída
     void setDataSaida(const std::string &data)
     {
         this->dataSaida = data;
     }
-
+//Define a quantidade de diarias
     void setQuantidadeDiarias(int dias)
     {
         this->quantidadeDiarias = dias;
     }
-
+//Define o código do cliente
     void setCodigoCliente(const std::string &codigo)
     {
         this->codigoCliente = codigo;
     }
-
+//Obtém o código da Estadia
     std::string getCodigoEstadia() const
     {
         return codigoEstadia;
     }
-
+//Obtém a data de entrada
     std::string getDataEntrada() const
     {
         return dataEntrada;
     }
-
+//Obtém a data de saída
     std::string getDataSaida() const
     {
         return dataSaida;
     }
-
+//Obtém a quantidade de diárias
     int getQuantidadeDiarias() const
     {
         return quantidadeDiarias;
     }
-
+//Obtém o código do cliente
     std::string getCodigoCliente() const
     {
         return codigoCliente;
     }
-
+//Gera o código da estadia
     void generateCodigoEstadia()
     {
         codigoEstadia = "EST" + std::to_string(++estadiaCounter);
     }
-
+//Salva os dados da estadia no arquivo
     void saveToFile(const std::string &filename)
     {
         FILE *outFile = fopen(filename.c_str(), "ab");
@@ -100,6 +105,7 @@ public:
     }
 
 private:
+    //Escreve os dados da estadias no arquivo
     void writeString(FILE *outFile, const std::string &str)
     {
         size_t length = str.size();

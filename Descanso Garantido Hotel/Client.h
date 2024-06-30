@@ -5,7 +5,13 @@
 #include <cstdio>
 #include <string>
 #include "Pessoa.h"
-
+/*
+classe Client:
+Representa um cliente, herdando atributos da classe Pessoa,
+Ela gerencia as informações dos clientes, como a geração do código, endereço,
+contato, pontos de fidelidade e funcionalidades para manipulação de arquivo
+binário
+*/
 class Client : public Pessoa
 {
 private:
@@ -16,60 +22,60 @@ private:
     static int clientCounter;
 
 public:
-    Client()
+    Client()//Construtor padrão
     {
         code = "";
         address = "";
         contact = "";
         pontosFidelidade = 0;
     }
-
+//Define  o código do cliente
     void setCode(const std::string &c)
     {
         this->code = c;
     }
-
+//Define o endereço do cliente
     void setAddress(const std::string &a)
     {
         this->address = a;
     }
-
+//Define o contato do cliente
     void setContact(const std::string &c)
     {
         this->contact = c;
     }
-
+//Obtém o código do cliente
     std::string getCode() const
     {
         return code;
     }
-
+//Obtém o endereço do cliente
     std::string getAddress() const
     {
         return address;
     }
-
+//Obtém o contato do cliente
     std::string getContact() const
     {
         return contact;
     }
-
+//Obtém o numero dos pontos de fidelidade
     int getPontosFidelidade() const
     {
         return pontosFidelidade;
     }
-
+//Soma pontos de fidelidade
     void addPontosFidelidade(int pontos)
     {
         pontosFidelidade += pontos;
     }
-
+//Gera o código de Cliente
     void generateClientCode()
     {
         clientCounter++;
         code = "CL" + std::to_string(clientCounter);
     }
-
+//Salva os dados do cliente num arquivo binário
     void saveToFile(const std::string &filename)
     {
         FILE *outFile = fopen(filename.c_str(), "ab");
@@ -90,7 +96,7 @@ public:
         fclose(outFile);
         std::cout << "Dados salvos com sucesso no arquivo " << filename << std::endl;
     }
-
+//Cadastra o cliente
     void cadastrarCliente()
     {
         cadastrarC();
@@ -104,7 +110,7 @@ public:
 
         std::cout << "\nCadastro de cliente realizado com sucesso!" << std::endl;
     }
-
+//Lê os dados do cliente em um arquivo
     void readFromFile(const std::string &filename)
     {
         FILE *inFile = fopen(filename.c_str(), "rb");
@@ -139,7 +145,7 @@ public:
 
         fclose(inFile);
     }
-
+//mostra as informações de um cliente
     void showInfo()
     {
         std::cout << "Informações do Cliente:" << std::endl;
@@ -150,15 +156,14 @@ public:
         std::cout << "Contato: " << contact << std::endl;
         std::cout << "Pontos de Fidelidade: " << pontosFidelidade << std::endl;
     }
-
+//Procura um cliente com base no critério inserido
     bool searchClient(const std::string &searchTerm)
     {
-        // Implemente a lógica de busca aqui
-        // Exemplo simples: busca por código ou nome
         return (code == searchTerm || getNome() == searchTerm);
     }
 
 private:
+    //Escreve no arquivo
     void writeString(FILE *file, const std::string &str)
     {
         size_t length = str.size();

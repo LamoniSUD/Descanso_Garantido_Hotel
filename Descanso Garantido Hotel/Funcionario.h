@@ -7,7 +7,12 @@
 #include <sstream>
 #include <limits>    // Necessário para std::numeric_limits
 #include "Pessoa.h"
+/*classe funcionario
+Representa um funcionário, herda atributos da classe pessoa.
+Ela gerencia as informações dos funcionários,como salário,
+matrícula e cargo
 
+*/
 class Funcionario : public Pessoa
 {
 private:
@@ -23,44 +28,44 @@ public:
         cargo = "";
         salario = 0.0;
     }
-
+//Define a matrícula do funcionário
     void setMatricula(const std::string &m)
     {
         this->matricula = m;
     }
-
+//Define o cargo do funcionario
     void setCargo(const std::string &c)
     {
         this->cargo = c;
     }
-
+//Define o salario do funcionario
     void setSalario(double s)
     {
         this->salario = s;
     }
-
+//Obtém a matrícula do funcionário
     std::string getMatricula() const
     {
         return matricula;
     }
-
+//Obtém o cargo do funcionario
     std::string getCargo() const
     {
         return cargo;
     }
-
+//Obtém o o salário do funcionário
     double getSalario() const
     {
         return salario;
     }
-
+//Gera a matrícula do funcionário
     void generateEmployeeMatricula()
     {
         std::ostringstream oss;
         oss << "EMP" << ++employeeCounter;
         matricula = oss.str();
     }
-
+//Salva no arquivo os dados em um arquivo binário
     void saveToFile(const std::string &filename)
     {
         std::ofstream outFile(filename, std::ios::binary | std::ios::app);
@@ -80,7 +85,7 @@ public:
         outFile.close();
         std::cout << "Dados salvos com sucesso no arquivo " << filename << std::endl;
     }
-
+//Cadastra os dados do funcionário
     void cadastrarFuncionario()
     {
         cadastrarC();
@@ -95,7 +100,7 @@ public:
 
         std::cout << "\nCadastro de funcionário realizado com sucesso!" << std::endl;
     }
-
+//Exibe as informações do funcionário
     void exibirInformacoes()
     {
         std::cout << "Matrícula: " << matricula << std::endl;
@@ -104,12 +109,12 @@ public:
         std::cout << "Cargo: " << cargo << std::endl;
         std::cout << "Salário: " << salario << std::endl;
     }
-
+//Procura o funcionário com base na matrícula
     bool searchFuncionario(const std::string &matriculaToFind)
     {
         return (matricula == matriculaToFind);
     }
-
+//Exibe as informações do funcionário
     void showInfo()
     {
         std::cout << "Informações do Funcionário:" << std::endl;
@@ -121,6 +126,7 @@ public:
     }
 
 private:
+    //Escreve as informações do funcionário no arquvio
     void writeString(std::ofstream &outFile, const std::string &str)
     {
         size_t length = str.size();
