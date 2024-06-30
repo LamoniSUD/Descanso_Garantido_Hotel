@@ -1,4 +1,4 @@
-    #ifndef ESTADIA_H_INCLUDED
+#ifndef ESTADIA_H_INCLUDED
 #define ESTADIA_H_INCLUDED
 
 #include <iostream>
@@ -27,27 +27,27 @@ public:
 
     void setCodigoEstadia(const std::string &codigo)
     {
-        codigoEstadia = codigo;
+        this->codigoEstadia = codigo;
     }
 
     void setDataEntrada(const std::string &data)
     {
-        dataEntrada = data;
+        this->dataEntrada = data;
     }
 
     void setDataSaida(const std::string &data)
     {
-        dataSaida = data;
+        this->dataSaida = data;
     }
 
     void setQuantidadeDiarias(int dias)
     {
-        quantidadeDiarias = dias;
+        this->quantidadeDiarias = dias;
     }
 
     void setCodigoCliente(const std::string &codigo)
     {
-        codigoCliente = codigo;
+        this->codigoCliente = codigo;
     }
 
     std::string getCodigoEstadia() const

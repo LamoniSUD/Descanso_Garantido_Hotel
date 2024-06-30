@@ -26,17 +26,17 @@ public:
 
     void setCode(const std::string &c)
     {
-        code = c;
+        this->code = c;
     }
 
     void setAddress(const std::string &a)
     {
-        address = a;
+        this->address = a;
     }
 
     void setContact(const std::string &c)
     {
-        contact = c;
+        this->contact = c;
     }
 
     std::string getCode() const

@@ -26,17 +26,17 @@ public:
 
     void setMatricula(const std::string &m)
     {
-        matricula = m;
+        this->matricula = m;
     }
 
     void setCargo(const std::string &c)
     {
-        cargo = c;
+        this->cargo = c;
     }
 
     void setSalario(double s)
     {
-        salario = s;
+        this->salario = s;
     }
 
     std::string getMatricula() const

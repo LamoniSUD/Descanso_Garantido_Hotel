@@ -20,27 +20,27 @@ public:
 
     void setNumeroQuarto(const std::string& num)
     {
-        numeroQuarto = num;
+        this->numeroQuarto = num;
     }
 
     void setQuantidadeHospedes(int hospedes)
     {
-        quantidadeHospedes = hospedes;
+        this->quantidadeHospedes = hospedes;
     }
 
     void setValorDiaria(double valor)
     {
-        valorDiaria = valor;
+        this->valorDiaria = valor;
     }
 
     void setOcupado(bool estado)
     {
-        ocupado = estado;
+        this->ocupado = estado;
     }
 
     void setCodigoEstadia(const std::string& cod)
     {
-        codigoEstadia = cod;
+        this->codigoEstadia = cod;
         ocupado = !cod.empty(); // Se há código de estadia, o quarto está ocupado
     }
 
